@@ -21,31 +21,6 @@ public class FakeStoreProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<ProductDto[]> productsList = restTemplate.getForEntity(
-                "https://fakestoreapi.com/products",
-                ProductDto[].class);
-
-        List<Product> ansProductDto = new ArrayList<>();
-
-        for(ProductDto currProductDto: productsList.getBody()){
-            Product product = new Product();
-            product.setId(currProductDto.getId());
-            product.setTitle(currProductDto.getTitle());
-            product.setPrice(currProductDto.getPrice());
-
-            Category category = new Category();
-            category.setName(currProductDto.getCategory());
-            product.setCategory(category);
-            product.setImageUrl(currProductDto.getImage());
-            ansProductDto.add(product);
-        }
-
-        return ansProductDto;
-    }
-
-    @Override
     public Product getSingleProduct(Long productId) {
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<ProductDto> response = restTemplate.getForEntity("https://fakestoreapi.com/products/{id}", ProductDto.class, productId);
@@ -89,6 +64,31 @@ public class FakeStoreProductServiceImpl implements ProductService {
     @Override
     public Product updateProduct(Long productId, Product product) {
         return null;
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        ResponseEntity<ProductDto[]> productsList = restTemplate.getForEntity(
+                "https://fakestoreapi.com/products",
+                ProductDto[].class);
+
+        List<Product> ansProductDto = new ArrayList<>();
+
+        for(ProductDto currProductDto: productsList.getBody()){
+            Product product = new Product();
+            product.setId(currProductDto.getId());
+            product.setTitle(currProductDto.getTitle());
+            product.setPrice(currProductDto.getPrice());
+
+            Category category = new Category();
+            category.setName(currProductDto.getCategory());
+            product.setCategory(category);
+            product.setImageUrl(currProductDto.getImage());
+            ansProductDto.add(product);
+        }
+
+        return ansProductDto;
     }
 
     @Override
