@@ -1,17 +1,19 @@
 package dev.sarangan.productservicettseve.services;
 
-import dev.sarangan.productservicettseve.dtos.productDto;
-import org.springframework.web.bind.annotation.*;
+import dev.sarangan.productservicettseve.dtos.ProductDto;
+import dev.sarangan.productservicettseve.models.Product;
+
+import java.util.List;
 
 public interface ProductService {
 
-    String getAllProducts();
+    List<Product> getAllProducts();
 
-    String getSingleProduct(@PathVariable("productId") Long productId);
+    Product getSingleProduct(Long productId);
 
-    String addNewProduct(@RequestBody productDto productDto);
+    Product addNewProduct(ProductDto product);
 
-    String updateProduct(@PathVariable("productId") Long productId);
+    Product updateProduct(Long productId, Product product);
 
-    String deleteProduct(@PathVariable("productId") Long productId);
+    Boolean deleteProduct(Long productId);
 }

@@ -24,5 +24,4 @@ public class CategoryController {
         return "Getting Products in Specific Category";
     }
 
-
 }
