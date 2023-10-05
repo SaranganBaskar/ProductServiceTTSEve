@@ -1,6 +1,7 @@
 package dev.sarangan.productservicettseve.controllers;
 
 import dev.sarangan.productservicettseve.dtos.ProductDto;
+import dev.sarangan.productservicettseve.models.Category;
 import dev.sarangan.productservicettseve.models.Product;
 import dev.sarangan.productservicettseve.services.ProductService;
 import org.springframework.http.HttpStatus;
@@ -46,13 +47,33 @@ public class ProductController {
     }
 
 
+    @PatchMapping("/{productId}")
+    public Product updateProduct(@PathVariable("productId") Long productId, @RequestBody ProductDto productDto){
+        Product product = new Product();
+        product.setId(productDto.getId());
+        product.setCategory(new Category());
+        product.getCategory().setName(productDto.getCategory());
+        product.setTitle(productDto.getTitle());
+        product.setPrice(productDto.getPrice());
+        product.setDescription(productDto.getDescription());
+        return productService.updateProduct(productId, product);
+    }
+
     @PutMapping("/{productId}")
-    public String updateProduct(@PathVariable("productId") Long productId){
-        return "Updating Product";
+    public Product replaceProduct(@PathVariable("productId") Long productId, @RequestBody ProductDto productDto){
+        Product product = new Product();
+        product.setId(productDto.getId());
+        product.setCategory(new Category());
+        product.getCategory().setName(productDto.getCategory());
+        product.setTitle(productDto.getTitle());
+        product.setPrice(productDto.getPrice());
+        product.setDescription(productDto.getDescription());
+        return productService.replaceProduct(productId, product);
     }
 
     @DeleteMapping("/{productId}")
-    public String deleteProduct(@PathVariable("productId") Long productId){
-        return "Deleting a product";
+    public Product deleteProduct(@PathVariable("productId") Long productId){
+
+        return productService.deleteProduct(productId);
     }
 }

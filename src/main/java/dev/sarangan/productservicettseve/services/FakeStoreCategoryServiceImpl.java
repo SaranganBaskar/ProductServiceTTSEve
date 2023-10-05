@@ -1,5 +1,6 @@
 package dev.sarangan.productservicettseve.services;
 
+import dev.sarangan.productservicettseve.dtos.FakeStoreProductDto;
 import dev.sarangan.productservicettseve.dtos.ProductDto;
 import dev.sarangan.productservicettseve.models.Category;
 import dev.sarangan.productservicettseve.models.Product;
@@ -31,13 +32,13 @@ public class FakeStoreCategoryServiceImpl implements CategoryService {
     @Override
     public List<Product> getProductsInCategory(String categoryId) {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<ProductDto[]> categorySpecificProductsList = restTemplate.getForEntity(
+        ResponseEntity<FakeStoreProductDto[]> categorySpecificProductsList = restTemplate.getForEntity(
                 "https://fakestoreapi.com/products/category/{categoryId}",
-                ProductDto[].class, categoryId);
+                FakeStoreProductDto[].class, categoryId);
 
         List<Product> ansCategorySpecificProductsDto = new ArrayList<>();
 
-        for(ProductDto currProductDto: categorySpecificProductsList.getBody()){
+        for(FakeStoreProductDto currProductDto: categorySpecificProductsList.getBody()){
             Product product = new Product();
             product.setId(currProductDto.getId());
             product.setTitle(currProductDto.getTitle());
