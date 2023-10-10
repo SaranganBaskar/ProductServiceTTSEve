@@ -4,6 +4,7 @@ import dev.sarangan.productservicettseve.dtos.FakeStoreProductDto;
 import dev.sarangan.productservicettseve.dtos.ProductDto;
 import dev.sarangan.productservicettseve.models.Category;
 import dev.sarangan.productservicettseve.models.Product;
+import dev.sarangan.productservicettseve.repositories.ProductRepository;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;

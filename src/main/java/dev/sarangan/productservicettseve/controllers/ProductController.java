@@ -3,6 +3,7 @@ package dev.sarangan.productservicettseve.controllers;
 import dev.sarangan.productservicettseve.dtos.ProductDto;
 import dev.sarangan.productservicettseve.models.Category;
 import dev.sarangan.productservicettseve.models.Product;
+import dev.sarangan.productservicettseve.repositories.ProductRepository;
 import dev.sarangan.productservicettseve.services.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,10 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private ProductRepository productRepository;
 
-    public ProductController(ProductService productService){
+    public ProductController(ProductService productService, ProductRepository productRepository){
+        this.productRepository = productRepository;
         this.productService = productService;
     }
     @GetMapping()
@@ -42,7 +45,15 @@ public class ProductController {
 
     @PostMapping()
     public ResponseEntity<Product> addNewProduct(@RequestBody ProductDto product){
-        Product newProduct = productService.addNewProduct(product);
+        //Product newProduct = productService.addNewProduct(product);
+
+        Product newProduct = new Product();
+        newProduct.setDescription(product.getDescription());
+        newProduct.setImageUrl(product.getImage());
+        newProduct.setTitle(product.getTitle());
+        newProduct.setPrice(product.getPrice());
+
+        newProduct= productRepository.save(newProduct);
         return new ResponseEntity<>(newProduct, HttpStatus.OK);
     }
 
