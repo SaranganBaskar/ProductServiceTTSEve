@@ -12,12 +12,17 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+//@Service
 public class FakeStoreCategoryServiceImpl implements CategoryService {
     private final RestTemplateBuilder restTemplateBuilder;
 
     public FakeStoreCategoryServiceImpl(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplateBuilder = restTemplateBuilder;
+    }
+
+    @Override
+    public Category createCategory(String categoryName, String categoryDescription) {
+        return null;
     }
 
     @Override

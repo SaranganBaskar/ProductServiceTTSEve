@@ -13,6 +13,12 @@ import java.util.List;
 public class Category extends BaseModel {
     private String name;
     private String description;
+    /*C : P
+      1 : M
+      1 : 1
+    ----------
+      1 : M (On the M side, create the relation of the other side)
+    */
     @OneToMany(mappedBy = "category")
     private List<Product> productList;
 }
