@@ -37,7 +37,8 @@ public class SelfCategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Product> getProductsInCategory(String categoryId) {
-        return null;
+    public List<Product> getProductsInCategory(String categoryName) {
+        Long categoryId = categoryRepository.getCategoryByName(categoryName).getId();
+        return categoryRepository.getProductsByCategoryId(categoryId);
     }
 }

@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
+//@Service
 public class FakeStoreProductServiceImpl implements ProductService {
 
     private final RestTemplateBuilder restTemplateBuilder;
@@ -51,7 +51,7 @@ public class FakeStoreProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product addNewProduct(ProductDto product) {
+    public Product addNewProduct(Product product) {
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductDto> response = restTemplate.postForEntity(
                 "https://fakestoreapi.com/products",

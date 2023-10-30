@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public ProductController(ProductService productService, ProductRepository productRepository){
         this.productRepository = productRepository;
@@ -84,7 +83,6 @@ public class ProductController {
 
     @DeleteMapping("/{productId}")
     public Product deleteProduct(@PathVariable("productId") Long productId){
-
         return productService.deleteProduct(productId);
     }
 
