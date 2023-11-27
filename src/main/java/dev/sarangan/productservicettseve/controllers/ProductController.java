@@ -20,17 +20,19 @@ public class ProductController {
     private final ProductService productService;
     private final ProductRepository productRepository;
 
-    public ProductController(ProductService productService, ProductRepository productRepository){
+    public ProductController(ProductService productService, ProductRepository productRepository) {
         this.productRepository = productRepository;
         this.productService = productService;
     }
+
+    //Make only Admins to access all the Products
     @GetMapping()
-    public List<Product> getAllProducts(){
-        return productService.getAllProducts();
+    public ResponseEntity<List<Product>> getAllProducts() {
+        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> getSingleProduct(@PathVariable("productId") Long productId){
+    public ResponseEntity<Product> getSingleProduct(@PathVariable("productId") Long productId) {
 
         //To Add response Headers
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
@@ -43,7 +45,7 @@ public class ProductController {
     }
 
     @PostMapping()
-    public ResponseEntity<Product> addNewProduct(@RequestBody ProductDto product){
+    public ResponseEntity<Product> addNewProduct(@RequestBody ProductDto product) {
         //Product newProduct = productService.addNewProduct(product);
 
         Product newProduct = new Product();
@@ -52,13 +54,13 @@ public class ProductController {
         newProduct.setTitle(product.getTitle());
         newProduct.setPrice(product.getPrice());
 
-        newProduct= productRepository.save(newProduct);
+        newProduct = productRepository.save(newProduct);
         return new ResponseEntity<>(newProduct, HttpStatus.OK);
     }
 
 
     @PatchMapping("/{productId}")
-    public Product updateProduct(@PathVariable("productId") Long productId, @RequestBody ProductDto productDto){
+    public Product updateProduct(@PathVariable("productId") Long productId, @RequestBody ProductDto productDto) {
         Product product = new Product();
         product.setId(productDto.getId());
         product.setCategory(new Category());
@@ -70,7 +72,7 @@ public class ProductController {
     }
 
     @PutMapping("/{productId}")
-    public Product replaceProduct(@PathVariable("productId") Long productId, @RequestBody ProductDto productDto){
+    public Product replaceProduct(@PathVariable("productId") Long productId, @RequestBody ProductDto productDto) {
         Product product = new Product();
         product.setId(productDto.getId());
         product.setCategory(new Category());
@@ -82,7 +84,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{productId}")
-    public Product deleteProduct(@PathVariable("productId") Long productId){
+    public Product deleteProduct(@PathVariable("productId") Long productId) {
         return productService.deleteProduct(productId);
     }
 
