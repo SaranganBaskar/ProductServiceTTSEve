@@ -40,7 +40,7 @@ public class SelfProductController {
             @Nullable @RequestHeader("AUTH_TOKEN") String token,
             @Nullable @RequestHeader("USER_ID") Long userId) {
 
-        //Check If Token and User Id exists
+        /*//Check If Token and User Id exists
         if (token == null || userId == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
@@ -61,7 +61,7 @@ public class SelfProductController {
 
         if(!isUserAdmin){
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
+        }*/
 
 
         List<Product> products = productService.getAllProducts();
