@@ -1,6 +1,6 @@
 CREATE TABLE category
 (
-    id             BIGINT NOT NULL,
+    id             BIGINT AUTO_INCREMENT NOT NULL,
     created_at     datetime NULL,
     last_update_at datetime NULL,
     is_deleted     BIT(1) NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE msc_ta
 
 CREATE TABLE product
 (
-    id             BIGINT NOT NULL,
+    id             BIGINT AUTO_INCREMENT NOT NULL,
     created_at     datetime NULL,
     last_update_at datetime NULL,
     is_deleted     BIT(1) NOT NULL,

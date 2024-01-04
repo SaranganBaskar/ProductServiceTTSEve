@@ -14,7 +14,8 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                                .requestMatchers("/SelfProducts").hasAuthority("ADMIN")
+                                .requestMatchers("/SelfProducts").permitAll()
+//                                .requestMatchers("/SelfProducts").hasAuthority("ADMIN")
                                 .anyRequest().authenticated() //Allow only the users who are authenticated
 //                        .anyRequest().permitAll() // Allow anyone
                 )

@@ -6,6 +6,7 @@ import dev.sarangan.productservicettseve.models.Category;
 import dev.sarangan.productservicettseve.models.Product;
 import dev.sarangan.productservicettseve.repositories.ProductRepository;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.data.domain.Page;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
@@ -148,5 +149,15 @@ public class FakeStoreProductServiceImpl implements ProductService {
                         uriVariables
                 );
         return convertFakeStoreProductDtoToProduct(fakeStoreProductDtoForDelete.getBody());
+    }
+
+    @Override
+    public Page<Product> getProducts(int numberOfProducts, int offset) {
+        return null;
+    }
+
+    @Override
+    public Page<Product> getProductsByTitle(String query, int numberOfProducts, int offset) {
+        return null;
     }
 }

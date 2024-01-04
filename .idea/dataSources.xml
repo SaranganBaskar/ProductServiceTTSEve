@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://localhost:3306/productservice3rdOct2023</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="productservice@productservice-30nov.cadx3odjh663.ap-southeast-2.rds.amazonaws.com" uuid="1eaea647-3537-45b6-b642-c3ba4a309447">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://productservice-30nov.cadx3odjh663.ap-southeast-2.rds.amazonaws.com:3306/productservice</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

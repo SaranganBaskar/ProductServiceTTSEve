@@ -4,12 +4,14 @@ import dev.sarangan.productservicettseve.clients.authenticationClient.Authentica
 import dev.sarangan.productservicettseve.clients.authenticationClient.dtos.ValidateTokenResponseDto;
 import dev.sarangan.productservicettseve.clients.authenticationClient.models.Role;
 import dev.sarangan.productservicettseve.clients.authenticationClient.models.SessionStatus;
+import dev.sarangan.productservicettseve.dtos.GetProductsRequestDto;
 import dev.sarangan.productservicettseve.dtos.ProductDto;
 import dev.sarangan.productservicettseve.models.Category;
 import dev.sarangan.productservicettseve.models.Product;
 import dev.sarangan.productservicettseve.services.ProductService;
 import dev.sarangan.productservicettseve.services.Utilities;
 import jakarta.annotation.Nullable;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -33,6 +35,27 @@ public class SelfProductController {
         this.productService = productService;
         this.utilities = utilities;
         this.authenticationClient = authenticationClient;
+    }
+
+    @GetMapping("/paginated")
+    public ResponseEntity<Page<Product>> getProducts(@RequestBody GetProductsRequestDto getProductsRequestDto) {
+        return new ResponseEntity<>(
+                productService.getProducts(
+                        getProductsRequestDto.getNumberOfResults(),
+                        getProductsRequestDto.getOffset()
+                ),
+                HttpStatus.OK);
+    }
+
+    @GetMapping("/paginated/title")
+    public ResponseEntity<Page<Product>> getProductsByTitle(@RequestBody GetProductsRequestDto getProductsRequestDto) {
+        return new ResponseEntity<>(
+                productService.getProductsByTitle(
+                        getProductsRequestDto.getTitleQuery(),
+                        getProductsRequestDto.getNumberOfResults(),
+                        getProductsRequestDto.getOffset()
+                ),
+                HttpStatus.OK);
     }
 
     @GetMapping()

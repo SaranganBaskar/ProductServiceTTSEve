@@ -1,6 +1,8 @@
 package dev.sarangan.productservicettseve.repositories;
 
 import dev.sarangan.productservicettseve.models.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -16,4 +18,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     //Product deleteProductById(Long productId);
 
     List<Product> findProductsByCategoryId(Long categoryId);
+
+    Page<Product> findAll(Pageable pageable);
+
+    Page<Product> findAllByTitleContaining(String query, Pageable pageable);
 }

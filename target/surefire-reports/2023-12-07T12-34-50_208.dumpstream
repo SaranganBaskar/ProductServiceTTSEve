@@ -1,0 +1,5 @@
+# Created at 2023-12-07T12:34:50.688
+Boot Manifest-JAR contains absolute paths in classpath 'E:\RENGAN\Personal\Scaler\Project Module\ProductServiceTTSEve\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

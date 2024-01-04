@@ -6,6 +6,8 @@ import dev.sarangan.productservicettseve.models.Product;
 import dev.sarangan.productservicettseve.repositories.CategoryRepository;
 import dev.sarangan.productservicettseve.repositories.ProductRepository;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +21,7 @@ public class SelfProductServiceImpl implements ProductService {
 
     private final CategoryRepository categoryRepository;
 
-    public SelfProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository){
+    public SelfProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
     }
@@ -43,7 +45,7 @@ public class SelfProductServiceImpl implements ProductService {
     @Override
     public Product updateProduct(Long productId, Product product) {
         Optional<Product> productTobReplaced = Optional.ofNullable(productRepository.findProductById(productId));
-        if(productTobReplaced.isPresent()){
+        if (productTobReplaced.isPresent()) {
             return productRepository.save(product);
         }
         return product;
@@ -52,7 +54,7 @@ public class SelfProductServiceImpl implements ProductService {
     @Override
     public Product replaceProduct(Long productId, Product product) {
         Optional<Product> productTobReplaced = Optional.ofNullable(productRepository.findProductById(productId));
-        if(productTobReplaced.isPresent()){
+        if (productTobReplaced.isPresent()) {
             return productRepository.save(product);
         }
         return product;
@@ -61,10 +63,28 @@ public class SelfProductServiceImpl implements ProductService {
     @Override
     public Product deleteProduct(Long productId) {
         Optional<Product> softDeleteProduct = Optional.ofNullable(productRepository.findProductById(productId));
-        if(softDeleteProduct.isPresent()){
+        if (softDeleteProduct.isPresent()) {
             softDeleteProduct.get().setDeleted(true);
             return productRepository.save(softDeleteProduct.get());
         }
         return softDeleteProduct.get();
     }
+
+    @Override
+    public Page<Product> getProducts(int numberOfProducts, int offset) {
+        Page<Product> products = productRepository.findAll(PageRequest.of((offset / numberOfProducts), numberOfProducts));
+        return products;
+    }
+
+    @Override
+    public Page<Product> getProductsByTitle(String query, int numberOfProducts, int offset) {
+        Page<Product> products = productRepository
+                .findAllByTitleContaining(
+                        query,
+                        PageRequest.of((offset / numberOfProducts),
+                                numberOfProducts));
+        return products;
+    }
+
+
 }

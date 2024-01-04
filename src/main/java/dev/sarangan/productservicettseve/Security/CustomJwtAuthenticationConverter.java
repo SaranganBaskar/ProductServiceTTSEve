@@ -14,12 +14,11 @@ import java.util.stream.Stream;
 
 public class CustomJwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 
-    private static Collection<? extends GrantedAuthority> extractResourceRoles(final Jwt jwt)
-    {
+    private static Collection<? extends GrantedAuthority> extractResourceRoles(final Jwt jwt) {
         List<String> roles = jwt.getClaim("roles");
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-        for (String role: roles) {
+        for (String role : roles) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role));
         }
 
@@ -30,8 +29,7 @@ public class CustomJwtAuthenticationConverter implements Converter<Jwt, Abstract
 
 
     @Override
-    public AbstractAuthenticationToken convert(final Jwt source)
-    {
+    public AbstractAuthenticationToken convert(final Jwt source) {
         Collection<GrantedAuthority> authorities = Stream.concat(defaultGrantedAuthoritiesConverter.convert(source)
                                 .stream(),
                         extractResourceRoles(source).stream())
